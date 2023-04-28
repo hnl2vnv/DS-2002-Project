@@ -138,3 +138,31 @@ BEGIN
 END//
 
 CALL PopulateDateDimension('2017/11/02', '2022/03/10'); 
+
+
+# Queries to test functionality
+SELECT * FROM dim_date
+LIMIT 10;
+
+
+# Query 1
+# Find the average grade of an AirBNB Listing by a superhost by Country 
+# Find the average grade of a restaurant by a cuisine and borough
+SELECT AVG(grade)
+FROM restaurants 
+LEFT JOIN cuisine 
+ON restaurants.grade = cuisine.grade
+WHERE cuisine = 1;
+
+# Query 2
+# What is the name of the restaurant with the highest grade?
+# What is the zipcode of the restaurant where this highest-graded restaurant is located?
+
+SELECT restaurants.grade, zipcode.restaurant
+FROM restaurants
+LEFT JOIN grade
+ON restaurants.zipcode = grade.zipcode
+LEFT JOIN zipcode
+ON restaurants.zipcode = zipcode
+ORDER BY grade DESC limit 1;
+
